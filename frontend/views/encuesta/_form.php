@@ -14,11 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id')->textInput() ?>
 
-    <?= $form->field($model, 'idfacultad')->textInput() ?>
+    <?= $form->field($model, 'idfacultad')->dropDownList($model->getFacultades()) ?>
 
     <?= $form->field($model, 'fechainicio')->textInput() ?>
 
     <?= $form->field($model, 'fechafin')->textInput() ?>
+
+    <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'usuario_id')->dropDownList($model->getUsuarios()) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

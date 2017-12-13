@@ -19,7 +19,7 @@ class PersonaSearch extends Persona
     {
         return [
             [['usrcod', 'usrpassword', 'usrnom', 'usrapp', 'usrapm', 'usrtelf', 'usremail', 'usrdir', 'usrfechanac', 'usrci', 'usrprof', 'usrfechainicio', 'usrfechafin', 'admlogin'], 'safe'],
-            [['usrest', 'grupcod'], 'integer'],
+            [['usrest', 'grupcod', 'tipousuario_id'], 'integer'],
         ];
     }
 
@@ -64,6 +64,7 @@ class PersonaSearch extends Persona
             'usrfechafin' => $this->usrfechafin,
             'usrest' => $this->usrest,
             'grupcod' => $this->grupcod,
+            'tipousuario_id' => $this->tipousuario_id,
         ]);
 
         $query->andFilterWhere(['like', 'usrcod', $this->usrcod])

@@ -23,10 +23,12 @@ use Yii;
  * @property integer $usrest
  * @property integer $grupcod
  * @property string $admlogin
+ * @property integer $tipousuario_id
  *
  * @property Detalleencuestapersona[] $detalleencuestapersonas
  * @property Administrador $admlogin0
  * @property Grupos $grupcod0
+ * @property Tipousuario $tipousuario
  */
 class Persona extends \yii\db\ActiveRecord
 {
@@ -44,9 +46,9 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['usrcod', 'usrpassword', 'usrnom', 'usrapp', 'usrfechainicio', 'usrfechafin', 'grupcod', 'admlogin'], 'required'],
+            [['usrcod', 'usrpassword', 'usrnom', 'usrapp', 'usrfechainicio', 'usrfechafin', 'grupcod', 'admlogin', 'tipousuario_id'], 'required'],
             [['usrfechanac', 'usrfechainicio', 'usrfechafin'], 'safe'],
-            [['usrest', 'grupcod'], 'integer'],
+            [['usrest', 'grupcod', 'tipousuario_id'], 'integer'],
             [['usrcod', 'usrpassword', 'usrci', 'admlogin'], 'string', 'max' => 15],
             [['usrnom'], 'string', 'max' => 35],
             [['usrapp', 'usrapm'], 'string', 'max' => 25],
@@ -55,6 +57,7 @@ class Persona extends \yii\db\ActiveRecord
             [['usrprof'], 'string', 'max' => 20],
             [['admlogin'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['admlogin' => 'admlogin']],
             [['grupcod'], 'exist', 'skipOnError' => true, 'targetClass' => Grupos::className(), 'targetAttribute' => ['grupcod' => 'grupcod']],
+            [['tipousuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tipousuario::className(), 'targetAttribute' => ['tipousuario_id' => 'id']],
         ];
     }
 
@@ -80,6 +83,7 @@ class Persona extends \yii\db\ActiveRecord
             'usrest' => 'Usrest',
             'grupcod' => 'Grupcod',
             'admlogin' => 'Admlogin',
+            'tipousuario_id' => 'Tipousuario ID',
         ];
     }
 
@@ -105,5 +109,13 @@ class Persona extends \yii\db\ActiveRecord
     public function getGrupcod0()
     {
         return $this->hasOne(Grupos::className(), ['grupcod' => 'grupcod']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipousuario()
+    {
+        return $this->hasOne(Tipousuario::className(), ['id' => 'tipousuario_id']);
     }
 }

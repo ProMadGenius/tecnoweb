@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Detalleencuestapersona;
+use app\models\Tipousuario;
 
 /**
- * DetalleencuestapersonaSearch represents the model behind the search form about `app\models\Detalleencuestapersona`.
+ * TipousuarioSearch represents the model behind the search form about `app\models\Tipousuario`.
  */
-class DetalleencuestapersonaSearch extends Detalleencuestapersona
+class TipousuarioSearch extends Tipousuario
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class DetalleencuestapersonaSearch extends Detalleencuestapersona
     public function rules()
     {
         return [
-            [['idencuesta', 'idindicador', 'iddetalle'], 'integer'],
-            [['respuesta', 'usrcod'], 'safe'],
+            [['id'], 'integer'],
+            [['descripcion'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class DetalleencuestapersonaSearch extends Detalleencuestapersona
      */
     public function search($params)
     {
-        $query = Detalleencuestapersona::find();
+        $query = Tipousuario::find();
 
         // add conditions that should always apply here
 
@@ -59,13 +59,10 @@ class DetalleencuestapersonaSearch extends Detalleencuestapersona
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idencuesta' => $this->idencuesta,
-            'idindicador' => $this->idindicador,
-            'iddetalle' => $this->iddetalle,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'respuesta', $this->respuesta])
-            ->andFilterWhere(['like', 'usrcod', $this->usrcod]);
+        $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

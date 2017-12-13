@@ -18,8 +18,8 @@ class EncuestaSearch extends Encuesta
     public function rules()
     {
         return [
-            [['id', 'idfacultad'], 'integer'],
-            [['fechainicio', 'fechafin'], 'safe'],
+            [['id'], 'integer'],
+            [['fechainicio', 'fechafin', 'titulo', 'idfacultad'], 'safe'],
         ];
     }
 
@@ -60,10 +60,12 @@ class EncuestaSearch extends Encuesta
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'idfacultad' => $this->idfacultad,
             'fechainicio' => $this->fechainicio,
             'fechafin' => $this->fechafin,
         ]);
+
+        $query->andFilterWhere(['like', 'titulo',          $this->titulo]);
+
 
         return $dataProvider;
     }

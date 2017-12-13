@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\Encuesta;
-use app\models\EncuestaSearch;
+use app\models\Tipousuario;
+use app\models\TipousuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EncuestaController implements the CRUD actions for Encuesta model.
+ * TipousuarioController implements the CRUD actions for Tipousuario model.
  */
-class EncuestaController extends Controller
+class TipousuarioController extends Controller
 {
     /**
      * @inheritdoc
@@ -29,20 +29,13 @@ class EncuestaController extends Controller
         ];
     }
 
-    public function actionIndice()
-    {
-        $table = new Encuesta;
-        $model = $table->find()->all();
-        return $this->render('indice', ["model" => $model]);
-    }
-
     /**
-     * Lists all Encuesta models.
+     * Lists all Tipousuario models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EncuestaSearch();
+        $searchModel = new TipousuarioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,7 +45,7 @@ class EncuestaController extends Controller
     }
 
     /**
-     * Displays a single Encuesta model.
+     * Displays a single Tipousuario model.
      * @param integer $id
      * @return mixed
      */
@@ -64,13 +57,13 @@ class EncuestaController extends Controller
     }
 
     /**
-     * Creates a new Encuesta model.
+     * Creates a new Tipousuario model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Encuesta();
+        $model = new Tipousuario();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +75,7 @@ class EncuestaController extends Controller
     }
 
     /**
-     * Updates an existing Encuesta model.
+     * Updates an existing Tipousuario model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,7 +94,7 @@ class EncuestaController extends Controller
     }
 
     /**
-     * Deletes an existing Encuesta model.
+     * Deletes an existing Tipousuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +107,15 @@ class EncuestaController extends Controller
     }
 
     /**
-     * Finds the Encuesta model based on its primary key value.
+     * Finds the Tipousuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Encuesta the loaded model
+     * @return Tipousuario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Encuesta::findOne($id)) !== null) {
+        if (($model = Tipousuario::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

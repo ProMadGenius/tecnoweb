@@ -3,13 +3,13 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "detalleencuestapersona".
  *
  * @property integer $idencuesta
  * @property integer $idindicador
- * @property string $descripcion
  * @property string $respuesta
  * @property string $usrcod
  * @property integer $iddetalle
@@ -34,9 +34,8 @@ class Detalleencuestapersona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idencuesta', 'idindicador', 'descripcion', 'respuesta', 'usrcod', 'iddetalle'], 'required'],
+            [['idencuesta', 'idindicador', 'usrcod'], 'required'],
             [['idencuesta', 'idindicador', 'iddetalle'], 'integer'],
-            [['descripcion'], 'string', 'max' => 1000],
             [['respuesta'], 'string', 'max' => 25],
             [['usrcod'], 'string', 'max' => 15],
             [['idencuesta'], 'exist', 'skipOnError' => true, 'targetClass' => Encuesta::className(), 'targetAttribute' => ['idencuesta' => 'id']],
@@ -53,7 +52,6 @@ class Detalleencuestapersona extends \yii\db\ActiveRecord
         return [
             'idencuesta' => 'Idencuesta',
             'idindicador' => 'Idindicador',
-            'descripcion' => 'Descripcion',
             'respuesta' => 'Respuesta',
             'usrcod' => 'Usrcod',
             'iddetalle' => 'Iddetalle',
@@ -83,4 +81,31 @@ class Detalleencuestapersona extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Persona::className(), ['usrcod' => 'usrcod']);
     }
+
+
+    public function getUsuarios()
+    {
+        $models = Persona::find()->asArray()->all();
+        return ArrayHelper::map($models, 'usrcod', 'usrnom');
+    }
+
+    public function getIndicador()
+    {
+        $models = Indicador::find()->asArray()->all();
+        return ArrayHelper::map($models, 'id', 'descripcion');
+    }
+
+    public function getTextoIndicador(){
+        return $this->idindicador0->descripcion;
+    }
+
+    public function getNombreUsuario(){
+        return $this->usrcod0->usrnom;
+    }
+
+    public function getTituloEncuesta(){
+        return $this->idencuesta0->titulo;
+    }
+
+
 }

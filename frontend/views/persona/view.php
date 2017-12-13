@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'usrest',
             'grupcod',
             'admlogin',
+            'tipousuario_id',
         ],
     ]) ?>
 
